@@ -1,0 +1,5 @@
+requests
+socket
+pydig
+multiprocessing
+wafw00f
