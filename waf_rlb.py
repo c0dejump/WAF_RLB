@@ -85,6 +85,8 @@ def while_requests(url):
 
     req = s.get(url, verify=False, timeout=10)
 
+    print(req)
+
     while req.status_code in [200, 404, 302, 301]:
         processes = []
      

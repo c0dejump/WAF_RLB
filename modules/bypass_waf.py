@@ -31,7 +31,7 @@ def bypass_waf(req, res):
     "Timing-Allow-Origin","X-Forwarded-For ", "X-Custom-IP-Authorization", "X-Real-Ip", "X-OReferrer", "X-Forwarded-Server", "Host"
     ]
 
-    options = [website_ip, domain, "127.0.0.1", "127.0.0.2", "*", "8.8.8.8", "null", "192.168.0.2", "10.0.0.1", "localhost", "0.0.0.0","::1","0:0:0:0:0:0:0:1"]
+    options = [website_ip, domain, "127.0.0.1", "127.0.0.2", "*", "8.8.8.8", "null", "localhost", "0.0.0.0","::1","0:0:0:0:0:0:0:1"]
 
     for i in range(0,255):
         options.append("192.168.0.{}".format(i))
@@ -53,8 +53,6 @@ def bypass_waf(req, res):
                 vrfy = verify_waf(req, res, headers)
                 if vrfy == False:
                     win = True
-                    for h in headers:
-                        print("{}Potential bypass WAF rate limit with option:\033[36m -H \"{}:{}\" \033[0m".format(WAF, h, headers[h]))
                     return headers
             except Exception:
                 pass

@@ -688,7 +688,10 @@ def verify_waf(s, res, headers=False, display=False):
                     print("{}{}{} Unknown page WAF detected : {} ".format(INFO_MOD, WAF, req_test.status_code, res))
                 return True
         else:
-            return False
+            for h in headers:
+                print("{}[{}] [{}] Potential bypass WAF rate limit with option:\033[36m -H \"{}:{}\" \033[0m".format(WAF, req_test.status_code, len(req_test.text), h, headers[h]))
+            if req_test.status_code not in [403, 400, 500]:
+                return False
     else:
         return False
 
